@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient  # Async Python driver for MongoDB
 
+from apps.bug_tracker.routers import router as bug_tracker_router
 from config import settings
 
 app = FastAPI()
@@ -17,6 +18,8 @@ async def startup_db_client():
 async def shutdown_db_client():
     app.mongodb_client.close()
 
+
+app.include_router(bug_tracker_router, tags=["bugs"], prefix="/bugs")
 
 if __name__ == "__main__":
     uvicorn.run(
