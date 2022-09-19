@@ -3,6 +3,9 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import { Button, Col, Divider, Form, Input, Row, Timeline } from "antd"
+import { CheckCircleOutlined, MinusCircleOutlined } from "@ant-design/icons"
+// import UsersView from './components/UsersListView';
 
 function App() {
   // -------  USERS  -------
@@ -31,6 +34,7 @@ function App() {
 
   // -------  Bugs  -------
   const [bugsList, setBugsList] = useState([{}])
+  const [timeline, setTimeline] = useState([])
   const [title, setTitle] = useState('') 
   const [assignee, setAssignee] = useState('') 
   const [desc, setDesc] = useState('')
@@ -44,6 +48,44 @@ function App() {
         setBugsList(res.data)
       })
   });
+
+  useEffect(() => {
+    const fetchAllBugs = async () => {
+      const response = await fetch("/bugs/")
+      const fetchedBugs = await response.json()
+      setBugsList(fetchedBugs)
+    }
+
+    const interval = setInterval(fetchAllBugs, 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+  useEffect(() => {
+    const timelineItems = bugsList.reverse().map((bug) => {
+      return bug.closed ? (
+        <Timeline.Item
+          dot={<CheckCircleOutlined />}
+          color="green"
+          style={{ textDecoration: "line-through", color: "green" }}
+        >
+          {bug.assignee} <small>({bug.title})</small>
+        </Timeline.Item>
+      ) : (
+        <Timeline.Item
+          dot={<MinusCircleOutlined />}
+          color="blue"
+          style={{ textDecoration: "initial" }}
+        >
+          {bug.assignee} <small>({bug.title})</small>
+        </Timeline.Item>
+      )
+    })
+
+    setTimeline(timelineItems)
+  }, [bugsList])
 
   // Post a bug
   const addBugHandler = () => {
@@ -80,7 +122,7 @@ function App() {
 
       {/* Add Bugs */}
       <hr />
-      <div className="card-body bg-light bg-gradient border-dark mt-3">
+      <div className="card-body border-dark mt-3">
       <h5 className="card text-white bg-dark bg-gradient mb-3">Add A Bug</h5>
       <span className="card-text"> 
         <input className="mb-2 form-control titleIn" placeholder='Title'/>
@@ -91,6 +133,7 @@ function App() {
       <h5 className="card text-white bg-dark bg-gradient mb-3">List of Bugs</h5>
       <div >
       {/* <BugsView bugsList={bugsList} /> */}
+      <Timeline mode="alternate">{timeline}</Timeline>
       </div>
       </div>
       <h6 className="card text-dark bg-warning py-1 mb-0" >Copyright 2022, All rights reserved &copy;</h6>
