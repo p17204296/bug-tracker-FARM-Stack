@@ -33,8 +33,8 @@ function App() {
       </div>
       <div className="view-selection-div">
         <button className="view-button active-button" onClick={() => showAddBug()}>Add Bug</button>
-        <button className="view-button" onClick={() => showDetailedBug()}>View Bugs</button>
-        <button className="view-button active-button" onClick={() => showAddUser()}>Add User</button>
+        <button data-testid="viewBugsTab" className="view-button" onClick={() => showDetailedBug()}>View Bugs</button>
+        <button data-testid="addUserTab" className="view-button active-button" onClick={() => showAddUser()}>Add User</button>
       </div>
     </div>
   );
