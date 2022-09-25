@@ -55,22 +55,27 @@ class UpdateBugModel(BaseModel):
 class UserModel(BaseModel):
     user_id: str = Field(default_factory=uuid.uuid4, alias="_id")
     user_name: str = Field(...)
+    active: Optional[bool]
+
 
     class Config:
         allow_population_by_field_name = True
         schema_extra = {
             "example": {
                 "user_name": "myusername",
+                "active": True,
             }
         }
 
 
 class UpdateUserModel(BaseModel):
     user_name: str = Field(...)
+    active: Optional[bool]
 
     class Config:
         schema_extra = {
             "example": {
                 "user_name": "kitten",
+                "active": True,
             }
         }
