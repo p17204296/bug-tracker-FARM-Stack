@@ -86,6 +86,25 @@ function AddBug() {
       }),
     })
   }
+
+  // Edit Bug Status
+  const editBugHandler = async (bugId) => {
+    await fetch(`/bugs/${bugId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        assignee: assignee,
+        description: desc,
+      }),
+    })
+  }
+
+
+
+
   // Delete bug
   const deleteBug = async (bugId) => {
     await fetch(`/bugs/${bugId}`, {
@@ -154,6 +173,52 @@ function AddBug() {
     const timelineItems = map_bugs
     setTimeline(timelineItems)
   }, [bugsList])
+
+  
+  // const edit_bug = bugsList.reverse().map((bug) => {
+  //   return bug._id ? (
+  //     <div className="App grey-card-contianer">
+  //       <div className="popup-box">
+  //         <div className="box">
+  //           <h2> Edit Issue </h2>
+  //           <span className="close-icon" onClick={togglePopup}>x</span>
+  //           <div className="add-issue">
+  //             <form>
+  //               <label>
+  //                 Title
+  //                 <input type="text" onChange={event => setTitle(event.target.value)} placeholder="Title of Bug..." required />
+  //               </label>
+  //               <label>
+  //                 Assign To
+  //                 <select onChange={event => setAssignee(event.target.value)}>
+  //                   {options.map((option) => {
+  //                     return (
+  //                       <option key={option.value} value={option.key}>
+  //                         {option.key}
+  //                       </option>
+  //                     );
+  //                   })}
+  //                 </select>
+  //               </label>
+  //               <label>
+  //                 Description
+  //                 <input type="text" onChange={event => setDesc(event.target.value)} placeholder="Description of Bug..." required />
+  //               </label>
+  //               <p onClick={editBugHandler}>Edit Bug</p>
+  //               {/* <button type="submit" onClick={editBugHandler}>Edit Bug</button> */}
+  //             </form>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>) :
+  //     (
+  //       <div className="indv-bug">
+  //         <p>There are no Bugs</p>
+  //         <hr />
+  //       </div>
+  //     )
+
+  // })
 
 
   return (

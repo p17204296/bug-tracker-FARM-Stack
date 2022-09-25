@@ -67,33 +67,54 @@ const Popup = props => {
   }
 
 
-  // Fetch all bugs 
-  // useEffect(() => {
-  //   const fetchAllBugs = async () => {
-  //     const response = await fetch("/bugs/")
-  //     const fetchedBugs = await response.json()
-  //     setBugsList(fetchedBugs)
-  //   }
+  // const map_users = usersList.reverse().map((user) => {
+  //   return user._id ? (
+  //     <div className="add-issue">
+  //       <form>
+  //         <label>
+  //           Title
+  //           {/* <input type="text" onChange={event => setTitle(event.target.value)} placeholder="Title of Bug..." value={selectedBug.title} required /> */}
+  //           <input type="text" onChange={event => setTitle(event.target.value)} placeholder="Title of Bug..." required />
+  //         </label>
+  //         <label>
+  //           Assign To
+  //           <select onChange={event => setAssignee(event.target.value)}>
+  //             {options.map((option) => {
+  //               return (
+  //                 <option key={option.value} value={option.key}>
+  //                   {option.key}
+  //                 </option>
+  //               );
+  //             })}
+  //           </select>
+  //         </label>
+  //         <label>
+  //           Description
+  //           <input type="text" onChange={event => setDesc(event.target.value)} placeholder="Description of Bug..." required />
+  //         </label>
+  //         <button type="submit" onClick={editBugHandler}>Edit Bug</button>
+  //       </form>
+  //     </div>
+  //   ) :
+  //     (
+  //       <div className="indv-user">
+  //         <p>There are no Users</p>
+  //         <hr />
+  //       </div>
+  //     )
 
-  //   const interval = setInterval(fetchAllBugs, 1000)
-
-  //   return () => {
-  //     clearInterval(interval)
-  //   }
-  // }, [])
-
+  // })
 
   return (
     <div className="App grey-card-contianer">
       <div className="popup-box">
         <div className="box">
-          <h2> Edit Issue </h2>
+          <h2> Edit Bug </h2>
           <span className="close-icon" onClick={props.handleClose}>x</span>
           <div className="add-issue">
             <form>
               <label>
                 Title
-                {/* <input type="text" onChange={event => setTitle(event.target.value)} placeholder="Title of Bug..." value={selectedBug.title} required /> */}
                 <input type="text" onChange={event => setTitle(event.target.value)} placeholder="Title of Bug..." required />
               </label>
               <label>

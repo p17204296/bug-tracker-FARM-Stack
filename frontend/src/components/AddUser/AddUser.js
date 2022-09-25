@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
-
-import { Timeline } from "antd"
-import {
-  CheckCircleOutlined,
-  DeleteOutlined,
-  MinusCircleOutlined,
-} from "@ant-design/icons"
+import EditUserPopup from './EditUserPopup';
 
 import "./AddUser.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -39,7 +32,6 @@ function AddUser() {
 
 
   const [usersList, setUsersList] = useState([{}])
-  const [timeline, setTimeline] = useState([])
 
   // Change Username
   const changeUserName = async (userId, user_name) => {
@@ -60,11 +52,6 @@ function AddUser() {
     })
   }
 
-
-  const onFinish = () => {
-    return
-  }
-
   // Fetch all users 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -80,13 +67,76 @@ function AddUser() {
     }
   }, [])
 
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
+
+  // Fetch one user
+  // const [selectedUser, setSelectedUser] = useState([])
+  // useEffect(() => {
+  //   const fetchOneUser = async (userId) => {
+  //     const response = await fetch(`/users/${userId}`, {
+  //       method: "GET",
+  //     })
+  //     const fetchedUsers = await response.json()
+  //     setSelectedUser(fetchedUsers)
+  //     console.log(fetchedUsers)
+  //   } 
+
+  //   const interval = setInterval(fetchOneUser, 1000)
+
+  //   return () => {
+  //     clearInterval(interval)
+  //   }
+  // }, [])
+
+  // Change User Details
+  const editUserHandler = async (userId) => {
+    await fetch(`/users/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_name: user_name,
+      }),
+    })
+  }
+
+
+  // const edit_user = selectedUser.map((user) => {
+  //   // setIsOpen(!isOpen);
+  //   return user._id ? (
+  //     <div className="add-issue">
+  //       <form>
+  //         <label>
+  //           Username
+  //           <input type="text" onChange={event => setUserName(event.target.value)} placeholder="Enter User Name..." required />
+  //         </label>
+  //         <button type="submit" onClick={editUserHandler}>Edit User</button>
+  //       </form>
+  //     </div>
+  //   ) :
+  //     (
+  //       <div className="indv-user">
+  //         <p>There are no Users</p>
+  //         <hr />
+  //       </div>
+  //     )
+
+  // })
+
+
   const map_users = usersList.reverse().map((user) => {
     return user._id ? (
 
       <div className="indv-user">
         <input type="hidden" value={user._id} id="userIdentifier" />
         <p className="delete-user" onClick={() => deleteUser(user._id)}>Delete User</p>
-        <p className="edit-user">Edit User</p>
+        <p className="edit-user" onClick={togglePopup}>Edit User</p>
         <p>
           Username<span>{user.user_name}</span>
         </p>
@@ -119,6 +169,8 @@ function AddUser() {
       <h5 className="card text-white bg-dark bg-gradient mb-3 pb-1 pt-1">List of Users</h5>
       <div className="current-users">
         {map_users}
+        {isOpen && <EditUserPopup handleClose={togglePopup} />}
+        {/* {isOpen && edit_user} */}
       </div>
 
     </div>
