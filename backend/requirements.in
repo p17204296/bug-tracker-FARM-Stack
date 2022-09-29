@@ -5,7 +5,10 @@ uvicorn[standard] == 0.13.4
 
 pydantic[email] == 1.7.3
 
+python-dotenv == 0.21.0
+
 # Database
+pymongo
 motor == 2.3.1
 dnspython == 2.1.0
 
