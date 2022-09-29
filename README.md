@@ -30,7 +30,7 @@ The goal is to implement a simple bug tracker. The Requirements of this app:
 -- Install txt file: `pip install -r requirements.txt`
 >  This will download the packages using the requirements.txt file
 
- - Ensure pymongo[srv], dnspython and python-dotenv are installed. pymongo is required to use run motor and access the mongodb database. python-dotenv is required to use the .env file
+ - Ensure pymongo[srv], dnspython and python-dotenv are installed. pymongo is required to use run motor and access the mongodb database. python-dotenv is **required** to use the **.env** file
  `pip install dnspython`
  `python -m install pymongo[srv]`
  `pip install python-dotenv`
