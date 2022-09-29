@@ -2,7 +2,7 @@ from fastapi import APIRouter, Body, HTTPException, Request, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
-from .models import BugModel, UpdateBugModel, UserModel, UpdateUserModel
+from .models import UserModel, UpdateUserModel
 
 router = APIRouter()
 
@@ -25,6 +25,15 @@ async def list_users(request: Request):
     for doc in await request.app.mongodb["users"].find().to_list(length=100):
         users.append(doc)
     return users
+
+
+@router.get("/{user_id}", response_description="Get a single user")
+async def show_user(user_id: str, request: Request):
+    # Assignment and Conditional Check
+    if (user := await request.app.mongodb["users"].find_one({"_id": user_id})) is not None:
+        return user
+
+    raise HTTPException(status_code=404, detail=f"User {user_id} not found")
 
 
 @router.put("/{user_id}", response_description="Update a user")

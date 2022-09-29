@@ -25,7 +25,7 @@ form label {
   margin-top: 20px;
 }
 
-form button {
+.submit-edit-user {
   border-radius: 5px;
   background: #007ae6;
   color: #fff;
