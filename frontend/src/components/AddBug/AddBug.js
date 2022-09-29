@@ -13,16 +13,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 function AddBug() {
-  // const [addBug, setAddBug] = useState(true);
 
   const [title, setTitle] = useState('')
   const [assignee, setAssignee] = useState('')
   const [desc, setDesc] = useState('')
-
-
-
-  const [closed, setClosed] = useState('')
-
 
   // Post a bug
   const addBugHandler = async () => {
@@ -40,8 +34,6 @@ function AddBug() {
         }),
       })
     }
-    // const userItems = map_user
-    // setUsersList(userItems)
   }
 
   // Fetch Username for "Assigned To" Dropdown Feild
@@ -102,19 +94,11 @@ function AddBug() {
     })
   }
 
-
-
-
   // Delete bug
   const deleteBug = async (bugId) => {
     await fetch(`/bugs/${bugId}`, {
       method: "DELETE",
     })
-  }
-
-
-  const onFinish = () => {
-    return
   }
 
   // Fetch all bugs 
@@ -174,53 +158,6 @@ function AddBug() {
     setTimeline(timelineItems)
   }, [bugsList])
 
-  
-  // const edit_bug = bugsList.reverse().map((bug) => {
-  //   return bug._id ? (
-  //     <div className="App grey-card-contianer">
-  //       <div className="popup-box">
-  //         <div className="box">
-  //           <h2> Edit Issue </h2>
-  //           <span className="close-icon" onClick={togglePopup}>x</span>
-  //           <div className="add-issue">
-  //             <form>
-  //               <label>
-  //                 Title
-  //                 <input type="text" onChange={event => setTitle(event.target.value)} placeholder="Title of Bug..." required />
-  //               </label>
-  //               <label>
-  //                 Assign To
-  //                 <select onChange={event => setAssignee(event.target.value)}>
-  //                   {options.map((option) => {
-  //                     return (
-  //                       <option key={option.value} value={option.key}>
-  //                         {option.key}
-  //                       </option>
-  //                     );
-  //                   })}
-  //                 </select>
-  //               </label>
-  //               <label>
-  //                 Description
-  //                 <input type="text" onChange={event => setDesc(event.target.value)} placeholder="Description of Bug..." required />
-  //               </label>
-  //               <p onClick={editBugHandler}>Edit Bug</p>
-  //               {/* <button type="submit" onClick={editBugHandler}>Edit Bug</button> */}
-  //             </form>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>) :
-  //     (
-  //       <div className="indv-bug">
-  //         <p>There are no Bugs</p>
-  //         <hr />
-  //       </div>
-  //     )
-
-  // })
-
-
   return (
     <div className="add-issue">
       <form>
@@ -249,7 +186,6 @@ function AddBug() {
       <hr />
       <h5 className="card text-white bg-dark bg-gradient mb-3 pb-1 pt-1">List of Bugs</h5>
       <div className="card text-white bg-gradient mb-3" style={{ 'borderRadius': '50px', "paddingTop": "20px" }}>
-        {/* <BugsView bugsList={bugsList} /> */}
         <Timeline mode="alternate">{timeline}</Timeline>
       </div>
 
