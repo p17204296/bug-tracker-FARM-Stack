@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 function AddUser() {
 
   const [user_name, setUserName] = useState('')
+  const [usersList, setUsersList] = useState([{}])
 
   // Post a user
   const addUserHandler = async () => {
@@ -23,13 +24,7 @@ function AddUser() {
         }),
       })
     }
-    // const userItems = map_user
-    // setUsersList(userItems)
   }
-
-
-  const [usersList, setUsersList] = useState([{}])
-
 
   // Delete user
   const deleteUser = async (userId) => {
@@ -64,22 +59,8 @@ function AddUser() {
     setPopUpID(userId);
   }
 
-  // Change User Details
-  const editUserHandler = async (userId) => {
-    await fetch(`/users/${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_name: user_name,
-      }),
-    })
-  }
-
   const map_users = usersList.reverse().map((user) => {
     return user._id ? (
-
       <div className="indv-user">
         <input type="hidden" value={user._id} id="userIdentifier" />
         <p className="delete-user" onClick={() => deleteUser(user._id)}>Delete User</p>
@@ -101,8 +82,7 @@ function AddUser() {
 
   })
 
-
-
+ 
   return (
     <div className="add-issue">
       <form>
@@ -117,7 +97,6 @@ function AddUser() {
       <div className="current-users">
         {map_users}
         {isOpen && <EditUserPopup handleClose={togglePopup} userId={popUpID} />}
-        {/* {isOpen && edit_user} */}
       </div>
 
     </div>

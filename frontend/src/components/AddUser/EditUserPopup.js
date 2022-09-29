@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import "./EditUser.css";
 import "./AddUser.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -83,26 +82,12 @@ const EditUserPopup = props => {
                 <input type="text" onChange={event => setUserName(event.target.value)} placeholder="Enter updated Username..." required />
               </label>
               <p className="submit-edit-user" onClick={() => editUserHandler(userId)} style={{ color: "white", cursor: "pointer", textAlign: "center" }}>Edit User</p>
-              {/* <button type="submit" onClick={() => editUserHandler(userId)}>Edit User</button> */}
             </form>
           </div>
         </div>
       </div>
     </div>
   );
-
-  // return (
-  //   <div className="App grey-card-contianer">
-  //     <div className="popup-box">
-  //       <div className="box">
-  //         <h2> Edit Username </h2>
-  //         <span className="close-icon" onClick={props.handleClose}>x</span>
-  //         {edit_user}
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-
 
 };
 
