@@ -6,7 +6,7 @@ import AddUser from '../components/AddUser/AddUser';
 
 test('Test No Users added', () => {
   render(<App />);
-  fireEvent.click(screen.getByTestId('addUserTab'));  
+  fireEvent.click(screen.getByTestId('addUserTab'));
   expect(screen.getByText(/There are no Users/i)).toBeInTheDocument();
 
 });

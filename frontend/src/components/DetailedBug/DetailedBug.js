@@ -14,7 +14,7 @@ function DetailedBug() {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }
-  
+
   function newTogglePopup(bugId) {
     setIsOpen(!isOpen);
     setPopUpID(bugId);
@@ -55,15 +55,15 @@ function DetailedBug() {
   }
 
   const [selectedBug, setSelectedBug] = useState([])
-    // Fetch one bug
-    const fetchOneBug = async (bugId) => {
-      const response = await fetch(`/bugs/${bugId}`, {
-        method: "GET",
-      })
-      const fetchedBug = await response.json()
-      setSelectedBug(fetchedBug)
-    }
-  
+  // Fetch one bug
+  const fetchOneBug = async (bugId) => {
+    const response = await fetch(`/bugs/${bugId}`, {
+      method: "GET",
+    })
+    const fetchedBug = await response.json()
+    setSelectedBug(fetchedBug)
+  }
+
 
   const map_bugs = bugsList.reverse().map((bug) => {
     return bug._id ? (

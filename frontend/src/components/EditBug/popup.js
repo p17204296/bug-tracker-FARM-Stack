@@ -87,8 +87,8 @@ const Popup = props => {
   return (
     <div className="App grey-card-contianer">
       <div className="popup-box">
-        <div className="box" style={{background: "#f6f6f6"}}>
-          <div style={{background: "white", padding: "6px 6px 3px 6px"}}>
+        <div className="box" style={{ background: "#f6f6f6" }}>
+          <div style={{ background: "white", padding: "6px 6px 3px 6px" }}>
             <h2> Current Bug Details </h2>
             <p>
               Title:  {bugsList.title}
