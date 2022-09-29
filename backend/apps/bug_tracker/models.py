@@ -57,7 +57,6 @@ class UserModel(BaseModel):
     user_name: str = Field(...)
     active: Optional[bool]
 
-
     class Config:
         allow_population_by_field_name = True
         schema_extra = {

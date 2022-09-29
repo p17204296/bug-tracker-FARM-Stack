@@ -28,6 +28,7 @@ function App() {
   return (
     <div className="App">
       <h1>Bug Tracker App - FARM STACK</h1>
+      <h2>For API Documentation: <a href="http://localhost:8000/docs">Click Here</a></h2>
       <div className="grey-card-contianer">
         {addBug & !addUser ? <AddBug /> : !addBug & !addUser ? <DetailedBug />: <AddUser />}
       </div>

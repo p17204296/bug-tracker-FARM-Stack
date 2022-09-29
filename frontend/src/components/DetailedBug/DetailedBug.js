@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
 import Popup from '../EditBug/popup';
 
 
 import "./DetailedBug.css";
 
 function DetailedBug() {
-  const [addIssue, setAddIssue] = useState(true);
 
   const [bugsList, setBugsList] = useState([{}])
-  const [timeline, setTimeline] = useState([])
-  const [title, setTitle] = useState('')
-  const [assignee, setAssignee] = useState('')
-  const [desc, setDesc] = useState('')
-  const [closed, setClosed] = useState('')
-
   const [isOpen, setIsOpen] = useState(false);
+  const [popUpID, setPopUpID] = useState('')
+
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+  }
+  
+  function newTogglePopup(bugId) {
+    setIsOpen(!isOpen);
+    setPopUpID(bugId);
   }
 
   // Fetch all bugs 
@@ -79,7 +78,7 @@ function DetailedBug() {
             <p className="close-bug"
               onClick={() => changeBugStatus(bug._id, true)}>Close Bug</p>
         }
-        <p className="edit-bug" onClick={togglePopup}>Edit Bug</p>
+        <p className="edit-bug" onClick={() => newTogglePopup(bug._id)}>Edit Bug</p>
         <p>
           Title<span>{bug.title}</span>
         </p>
@@ -114,8 +113,7 @@ function DetailedBug() {
 
     <div className="current-bugs">
       {map_bugs}
-      {isOpen && <Popup handleClose={togglePopup} />}
-
+      {isOpen && <Popup handleClose={togglePopup} bugId={popUpID} />}
     </div>
   );
 }
